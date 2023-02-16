@@ -24,12 +24,12 @@
     <div class="container">
         <canvas id="canvas"></canvas>
     </div>
-    <script type="text/javascript" src="src/point.js"></script>
-    <script type="text/javascript" src="src/assets.js"></script>
-    <script type="text/javascript" src="src/graphics.js"></script>
-    <script type="text/javascript" src="src/player.js"></script>
-    <script type="text/javascript" src="src/map.js"></script>
-    <script type="text/javascript" src="src/render.js"></script>
+    <script type="text/javascript" src="script/point.js"></script>
+    <script type="text/javascript" src="script/assets.js"></script>
+    <script type="text/javascript" src="script/graphics.js"></script>
+    <script type="text/javascript" src="script/player.js"></script>
+    <script type="text/javascript" src="script/map.js"></script>
+    <script type="text/javascript" src="script/render.js"></script>
     <script type="text/javascript">
         var canvas = document.getElementById("canvas");
         canvas.width = 1000;
@@ -86,9 +86,9 @@
         var render = new Render(renderSettings, map, player);
 
         var textures = [
-            "texture-stone-floor.jpg",
-            "texture-stone-ceiling.jpg",
-            "texture-stone-wall.jpg",
+            "art/texture-stone-floor.jpg",
+            "art/texture-stone-ceiling.jpg",
+            "art/texture-stone-wall.jpg",
         ];
         var assets = new Assets();
         assets.load(textures, () => {
