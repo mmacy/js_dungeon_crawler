@@ -1,6 +1,9 @@
-<html>
+<!doctype html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
+    <meta charset="utf-8" />
     <title>RPG</title>
     <style type="text/css">
         body {
@@ -8,6 +11,7 @@
             padding: 0;
             background-color: #111;
         }
+
         .container {
             width: 1000px;
             height: 600px;
@@ -47,7 +51,7 @@
             windowHeight: 400,
             distance: 700,
             renderCellDistance: 5,
-            renderCellWidth: 2
+            renderCellWidth: 2,
         };
         var player = new Player();
         var map = new Map();
@@ -72,20 +76,19 @@
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
         ];
         /*
-        map.tiles = [
-            [0, 0, 0, 0],
-            [0, 2, 2, 0],
-            [0, 2, 2, 0],
-            [0, 0, 0, 0]
-        ];
-        */
+            map.tiles = [
+                [0, 0, 0, 0],
+                [0, 2, 2, 0],
+                [0, 2, 2, 0],
+                [0, 0, 0, 0]
+            ];
+            */
         var render = new Render(renderSettings, map, player);
 
         var textures = [
-            'metal01.jpg',
-            'metal02.jpg',
-            'metal03.jpg',
-            'metal04.jpg'
+            "texture-stone-floor.jpg",
+            "texture-stone-ceiling.jpg",
+            "texture-stone-wall.jpg",
         ];
         var assets = new Assets();
         assets.load(textures, () => {
@@ -93,7 +96,7 @@
             render.render();
         });
 
-        document.addEventListener('keydown', (event) => {
+        document.addEventListener("keydown", (event) => {
             const keyName = event.key;
             switch (keyName) {
                 case "ArrowUp":

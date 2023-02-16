@@ -25,7 +25,7 @@ Assets = class {
         var remaining = srcs.length;
         for (var i = 0; i < srcs.length; i++) {
             img = new Image();
-            img.onload = function() {
+            img.onload = function () {
                 --remaining;
                 if (remaining <= 0) {
                     callback();

@@ -1,4 +1,3 @@
-
 Render = class {
     constructor(settings, map, player) {
         this.settings = settings;
@@ -8,7 +7,11 @@ Render = class {
 
     render() {
         for (let y = this.settings.renderCellDistance; y >= 0; y--) {
-            for (let x = -this.settings.renderCellWidth; x < this.settings.renderCellWidth + 1; x++) {
+            for (
+                let x = -this.settings.renderCellWidth;
+                x < this.settings.renderCellWidth + 1;
+                x++
+            ) {
                 this._renderCell(x, y, this._cellMapRenderPlayerPosition(x, y));
             }
         }
@@ -22,55 +25,76 @@ Render = class {
             u,
             v
         );
-    };
+    }
 
     _cellPoints(x, y, height) {
         return {
-            a: this._transform({
-                x: (x - 0.5) * this.settings.cellSize,
-                y: height,
-                z: (y - 0.5) * this.settings.cellSize
-            }, 0, 0),
-            b: this._transform({
-                x: (x + 0.5) * this.settings.cellSize,
-                y: height,
-                z: (y - 0.5) * this.settings.cellSize
-            }, 800, 0),
-            c: this._transform({
-                x: (x + 0.5) * this.settings.cellSize,
-                y: height,
-                z: (y + 0.5) * this.settings.cellSize
-            }, 800, 600),
-            d: this._transform({
-                x: (x - 0.5) * this.settings.cellSize,
-                y: height,
-                z: (y + 0.5) * this.settings.cellSize
-            }, 0, 600)
-        }
+            a: this._transform(
+                {
+                    x: (x - 0.5) * this.settings.cellSize,
+                    y: height,
+                    z: (y - 0.5) * this.settings.cellSize,
+                },
+                0,
+                0
+            ),
+            b: this._transform(
+                {
+                    x: (x + 0.5) * this.settings.cellSize,
+                    y: height,
+                    z: (y - 0.5) * this.settings.cellSize,
+                },
+                800,
+                0
+            ),
+            c: this._transform(
+                {
+                    x: (x + 0.5) * this.settings.cellSize,
+                    y: height,
+                    z: (y + 0.5) * this.settings.cellSize,
+                },
+                800,
+                600
+            ),
+            d: this._transform(
+                {
+                    x: (x - 0.5) * this.settings.cellSize,
+                    y: height,
+                    z: (y + 0.5) * this.settings.cellSize,
+                },
+                0,
+                600
+            ),
+        };
     }
 
     _renderCell(x, y, cellPos) {
         const cell = this.map.tile(cellPos);
         if (cell > 0) {
-
             const f = this._cellPoints(x, y + 1, -this.settings.playerHeight);
-            const c = this._cellPoints(x, y + 1, this.settings.cellHeight - this.settings.playerHeight);
+            const c = this._cellPoints(
+                x,
+                y + 1,
+                this.settings.cellHeight - this.settings.playerHeight
+            );
 
             const tex = {
-                floor: this.assets.image('metal02.jpg'),
-                ceil:  this.assets.image('metal04.jpg'),
-                wall: this.assets.image('metal03.jpg')
-            }
+                floor: this.assets.image("texture-stone-floor.jpg"),
+                ceil:  this.assets.image("texture-stone-ceiling.jpg"),
+                wall:  this.assets.image("texture-stone-wall.jpg"),
+            };
             //Graphics.poly(f.a, f.b, f.c, f.d);
             //Graphics.poly(c.a, c.b, c.c, c.d);
             Graphics.texture(tex.floor, [f.a, f.b, f.c, f.d]);
             Graphics.texture(tex.ceil, [c.a, c.b, c.c, c.d]);
 
-            const color = "rgba(0, 0, 0, " + (y / 6) + ")";
+            const color = "rgba(0, 0, 0, " + y / 6 + ")";
             Graphics.polyFill(f.a, f.b, f.c, f.d, color);
             Graphics.polyFill(c.a, c.b, c.c, c.d, color);
 
-            let frontCell = this.map.tile(this._cellMapRenderPlayerPosition(x, y + 1));
+            let frontCell = this.map.tile(
+                this._cellMapRenderPlayerPosition(x, y + 1)
+            );
             if (frontCell == 0) {
                 //Graphics.poly(f.c, f.d, c.d, c.c);
                 f.c.uv(0, 0);
@@ -80,7 +104,9 @@ Render = class {
                 Graphics.texture(tex.wall, [f.c, f.d, c.d, c.c]);
                 Graphics.polyFill(f.c, f.d, c.d, c.c, color);
             }
-            let rightCell = this.map.tile(this._cellMapRenderPlayerPosition(x - 1, y));
+            let rightCell = this.map.tile(
+                this._cellMapRenderPlayerPosition(x - 1, y)
+            );
             if (rightCell == 0) {
                 //Graphics.poly(f.a, f.d, c.d, c.a);
                 f.a.uv(0, 0);
