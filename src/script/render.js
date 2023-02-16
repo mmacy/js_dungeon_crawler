@@ -79,9 +79,9 @@ Render = class {
             );
 
             const tex = {
-                floor: this.assets.image("texture-stone-floor.jpg"),
-                ceil:  this.assets.image("texture-stone-ceiling.jpg"),
-                wall:  this.assets.image("texture-stone-wall.jpg"),
+                floor: this.assets.image("art/texture-stone-floor.jpg"),
+                ceil:  this.assets.image("art/texture-stone-ceiling.jpg"),
+                wall:  this.assets.image("art/texture-stone-wall.jpg"),
             };
             //Graphics.poly(f.a, f.b, f.c, f.d);
             //Graphics.poly(c.a, c.b, c.c, c.d);
