@@ -7,14 +7,14 @@ Player = class {
 
     turnLeft() {
         this.orientation -= 1;
-        if (this.orientation  < 0) {
+        if (this.orientation < 0) {
             this.orientation = 3;
         }
     }
 
     turnRight() {
         this.orientation += 1;
-        if (this.orientation  > 3) {
+        if (this.orientation > 3) {
             this.orientation = 0;
         }
     }
@@ -29,17 +29,17 @@ Player = class {
 
     _go(map, step) {
         let newPos = this.pos.clone();
-        switch(this.orientation) {
-            case 0: 
+        switch (this.orientation) {
+            case 0:
                 newPos.add(0, -step);
                 break;
-            case 1: 
+            case 1:
                 newPos.add(step, 0);
                 break;
-            case 2: 
+            case 2:
                 newPos.add(0, step);
                 break;
-            case 3: 
+            case 3:
                 newPos.add(-step, 0);
                 break;
         }
